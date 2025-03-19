@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import IconButton from '@ui/components/button/IconButton';
 
@@ -32,7 +34,7 @@ const ToggleIconButton = ({
 
   return (
     <IconButton
-      img={isToggled ? onImg : offImg}
+      path={isToggled ? onImg : offImg}
       tintColor={isToggled ? onTintColor : offTintColor}
       onClick={handleClick}
       className={className}

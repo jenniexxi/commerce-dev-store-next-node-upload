@@ -17,13 +17,13 @@ export type BtnSize = 'lg' | 'md' | 'sm' | 'xsm';
  * 버튼 컴포넌트의 Props 타입
  */
 
-interface Props {
+type Props = {
   /** 버튼의 스타일 타입 */
   btnType?: BtnType;
   /** 클릭 이벤트 핸들러 */
   onClick?: ((e: React.MouseEvent<HTMLButtonElement>) => void) | (() => void);
   /** 버튼에 표시될 텍스트 또는 엘리먼트 */
-  title: string | JSX.Element;
+  title?: string | JSX.Element;
   /** 버튼의 크기 */
   size?: BtnSize;
   /** 버튼의 너비 (px) */
@@ -38,7 +38,8 @@ interface Props {
   disabled?: boolean;
   className?: string;
   textHighLight?: boolean;
-}
+  style?: any;
+};
 
 /**
  * 공통으로 사용되는 버튼 컴포넌트
@@ -55,7 +56,7 @@ interface Props {
 const Button = ({
   btnType = 'primary',
   onClick,
-  title,
+  title = '확인',
   size = 'lg',
   width,
   leftIcon,
@@ -65,6 +66,7 @@ const Button = ({
   disabled,
   className,
   textHighLight = false,
+  style,
 }: Props) => {
   return (
     <S.Button
@@ -77,6 +79,7 @@ const Button = ({
       className={className}
       disabled={disabled}
       $textHighLight={textHighLight}
+      style={style}
     >
       {leftIcon && (
         <>

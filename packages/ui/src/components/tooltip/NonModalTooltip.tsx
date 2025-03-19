@@ -1,26 +1,29 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+'use client';
+
+import React, { JSX, useCallback, useEffect, useRef, useState } from 'react';
 import { T } from '@ui/commons';
 import SvgIcon from '@ui/commons/SvgIcon';
 import { colors } from '@ui/styles/theme';
-import R from '@ui/utils/resourceMapper';
+
 import * as S from './NonModalTooltip.style';
 
 export type TooltipItem = string | JSX.Element;
 
-interface Props {
+type Props = {
   items?: TooltipItem[];
   title?: string | JSX.Element;
   trigerColor?: string;
   trigerType?: '!' | '?' | 'i';
   className?: string;
   position?: 'left' | 'right' | 'center';
+  isTop?: boolean;
   shouldClose?: boolean;
   showCloseButton?: boolean;
   defaultShown?: boolean;
+  size?: number;
   withDot?: boolean;
   children?: JSX.Element;
-}
-
+};
 const NonModalTooltip = ({
   items,
   title,
@@ -31,7 +34,9 @@ const NonModalTooltip = ({
   shouldClose = true,
   showCloseButton = true,
   defaultShown = false,
+  size = 16,
   withDot = true,
+  isTop = false,
   children,
 }: Props) => {
   const [isShown, setIsShown] = useState(defaultShown);
@@ -82,23 +87,29 @@ const NonModalTooltip = ({
       case '!':
         return (
           <SvgIcon
-            name={R.svg.icoExclamationCircle}
+            path={'/ui/svg/ico_exclamation_circle.svg'}
             tintColor={trigerColor}
+            width={size}
+            height={size}
           />
         );
       case 'i':
         return (
           <SvgIcon
-            name={R.svg.icoInfoCircle}
+            path={'/ui/svg/ico_info_circle.svg'}
             tintColor={trigerColor}
+            width={size}
+            height={size}
           />
         );
       case '?':
       default:
         return (
           <SvgIcon
-            name={R.svg.icoQuestionCircle}
+            path={'/ui/svg/ico_question_circle.svg'}
             tintColor={trigerColor}
+            width={size}
+            height={size}
           />
         );
     }
@@ -116,6 +127,7 @@ const NonModalTooltip = ({
         <S.TipTarget
           ref={targetRef}
           $position={position}
+          $isTop={isTop}
         >
           {title && (
             <S.TitleWrap>
@@ -133,7 +145,7 @@ const NonModalTooltip = ({
           {showCloseButton && (
             <S.CloseButton onClick={handleCloseClick}>
               <SvgIcon
-                name={R.svg.icoClose}
+                path={'/ui/svg/ico_close.svg'}
                 width={20}
                 height={20}
                 tintColor={colors.icon3}
@@ -145,5 +157,4 @@ const NonModalTooltip = ({
     </S.TipContainer>
   );
 };
-
 export default NonModalTooltip;

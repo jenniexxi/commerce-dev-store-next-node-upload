@@ -9,6 +9,7 @@ interface Props {
   itemWidth?: number;
   isFixedWidth: boolean;
   isBottomLineStretch: boolean;
+  tabStyle?: 'basic' | 'chip';
 }
 
 const TabItem = ({
@@ -20,6 +21,7 @@ const TabItem = ({
   itemWidth,
   isFixedWidth,
   isBottomLineStretch,
+  tabStyle = 'basic',
 }: Props) => {
   return (
     <S.TabItem
@@ -27,11 +29,13 @@ const TabItem = ({
       $isFixedWidth={isFixedWidth}
       $width={itemWidth}
       $height={height}
+      $tabStyle={tabStyle}
     >
       <S.TabItemLabel
         $isSelected={isSelected}
         $isBottomLineStretch={isBottomLineStretch}
         className={isSelected ? 'isSelected' : ''}
+        $tabStyle={tabStyle}
       >
         <span>
           {label}
@@ -39,6 +43,7 @@ const TabItem = ({
         </span>
         <S.SelectBorder
           $isSelected={isSelected}
+          $tabStyle={tabStyle}
           className='line'
         />
       </S.TabItemLabel>

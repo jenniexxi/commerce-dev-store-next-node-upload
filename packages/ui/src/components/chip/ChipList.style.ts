@@ -1,5 +1,7 @@
+'use client';
+
 import styled, { css } from 'styled-components';
-import R from '@ui/utils/resourceMapper';
+// import R from '@ui/utils/resourceMapper';
 import { ChipColorType, ChipType } from './ChipList';
 
 export const ChipWrap = styled.div``;
@@ -18,32 +20,32 @@ export const Chip = styled.div<{
     switch ($chipType) {
       case 'option':
         return css`
-          border-radius: 1.2rem;
+          padding: 0.8rem 1.2rem;
           border: 1px solid ${theme.colors.line3};
+          border-radius: 1.2rem;
           color: ${theme.colors.text3};
           ${theme.fonts.body2_normal};
-          padding: 0.8rem 1.2rem;
           line-height: 1.286;
         `;
       default:
         if ($colorType === 'black') {
           return css`
-            border-radius: 2.4rem;
+            padding: 0.8rem 1.45rem;
             border: 1px solid ${theme.colors.line3};
+            border-radius: 2.4rem;
             background-color: ${theme.colors.background1};
             color: ${theme.colors.text3};
             ${theme.fonts.body2_normal};
-            padding: 0.8rem 1.45rem;
             line-height: 1.286;
           `;
         } else {
           return css`
-            border-radius: 2.4rem;
+            padding: 0.8rem 1.45rem;
             border: 1px solid ${theme.colors.line3};
+            border-radius: 2.4rem;
             background-color: ${theme.colors.background1};
             color: ${theme.colors.text3};
             ${theme.fonts.body2_normal};
-            padding: 0.8rem 1.45rem;
             line-height: 1.286;
           `;
         }
@@ -114,15 +116,17 @@ export const Chip = styled.div<{
       &::after {
         display: inline-block;
         content: '';
-        background-image: url(${R.svg.icoChevronLeft});
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+
+        /* background-image: url(R.svg.icoChevronLeft); */
         filter: invert(50%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(85%) contrast(85%);
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 1.6rem;
         height: 1.6rem;
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
+
         transform: rotate(270deg);
         ${childStyles}
       }
@@ -158,25 +162,24 @@ export const FilterItemBox = styled.div<{ $filterUI: boolean }>`
   left: 0;
   z-index: 10;
   ${({ $filterUI }) =>
-    $filterUI
-      ? css`
-          &::before {
-            display: inline-block;
-            position: absolute;
-            top: -12px;
-            left: -17px;
-            z-index: -1;
-            width: 6.8rem;
-            height: 5.2rem;
-            content: '';
-            background: linear-gradient(90deg, #fff 80.15%, rgb(255 255 255 / 0%) 100%);
-          }
+    $filterUI &&
+    css`
+      &::before {
+        display: inline-block;
+        position: absolute;
+        top: -12px;
+        left: -17px;
+        z-index: -1;
+        width: 6.8rem;
+        height: 5.2rem;
+        content: '';
+        background: linear-gradient(90deg, #fff 80.15%, rgb(255 255 255 / 0%) 100%);
+      }
 
-          span {
-            display: none;
-          }
-        `
-      : css``}
+      span {
+        display: none;
+      }
+    `}
 `;
 
 export const FilterItem = styled.div<{ $filterUI: boolean }>`

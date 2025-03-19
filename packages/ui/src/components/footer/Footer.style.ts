@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import SvgIcon from '@ui/commons/SvgIcon';
 
 export const Footer = styled.footer`
+  margin-top: auto;
   padding: 3.2rem 1.6rem 3rem;
   background-color: ${({ theme }) => theme.colors.background2};
 
   p {
+    margin-top: 0.8rem;
     ${({ theme }) => theme.fonts.body2_normal};
     color: ${({ theme }) => theme.colors.text4};
-    margin-top: 0.8rem;
   }
 `;
 
@@ -19,8 +19,9 @@ export const FooterTitle = styled.div`
   color: ${({ theme }) => theme.colors.text4};
 `;
 
-export const SvgIconArrow = styled(SvgIcon)`
+export const SvgIconArrow = styled.i`
   margin-left: 0.4rem;
+  font-size: 0;
 `;
 
 export const FooterWrap = styled.div`
@@ -38,9 +39,9 @@ export const FooterList = styled.ul`
   }
 
   li {
+    margin-right: 1.5rem;
     ${({ theme }) => theme.fonts.caption1_normal};
     color: ${({ theme }) => theme.colors.text4};
-    margin-right: 1.5rem;
 
     a {
       ${({ theme }) => theme.fonts.caption1_normal};

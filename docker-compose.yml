@@ -1,0 +1,26 @@
+version: '3.8' # Docker Compose 파일 형식 버전, 3.8은 고급 기능(configs, secrets 등)을 지원함
+
+services: # 실행할 컨테이너 서비스들을 정의하는 섹션
+  commerce: # 서비스 이름, 컨테이너 그룹의 논리적 이름
+    build: # 이미지를 직접 지정하지 않고 빌드 옵션 사용
+      context: . # 빌드 컨텍스트 경로, '.'은 현재 디렉토리(모노레포 루트)를 의미
+      dockerfile: apps/commerce/Dockerfile # 사용할 Dockerfile 경로, commerce 서비스의 도커파일
+    container_name: ecommerce-dev # 생성될 컨테이너의 이름 지정, 명시적 이름
+    ports: # 호스트와 컨테이너 간 포트 매핑 설정
+      - '3000:3000' # 호스트의 3000 포트를 컨테이너의 3000 포트에 매핑
+    environment: # 컨테이너 내부 환경변수 설정
+      - NODE_ENV=development # Node.js 환경을 개발 모드로 설정
+      - TURBO_TEAM=${TURBO_TEAM} # Turborepo 팀 식별자, 호스트의 환경변수 값 사용
+      - TURBO_TOKEN=${TURBO_TOKEN} # Turborepo 접근 토큰, 호스트의 환경변수 값 사용
+    restart: always # 컨테이너가 종료되면 항상 자동 재시작
+    labels: # 컨테이너에 메타데이터 라벨 추가, Traefik 프록시 설정에 사용
+      - 'traefik.enable=true' # Traefik에서 이 서비스를 라우팅 대상으로 활성화
+      - 'traefik.http.routers.commerce-dev.rule=Host(`ecommerce-dev.hectoinnovation.co.kr`)' # 도메인 기반 라우팅 규칙
+      - 'traefik.http.routers.commerce-dev.tls=true' # HTTPS/TLS 활성화
+      - 'traefik.http.services.commerce-dev.loadbalancer.server.port=3000' # 로드밸런서가 트래픽을 보낼 컨테이너 포트
+    networks: # 컨테이너가 연결될 네트워크 설정
+      - web-network # 외부에 정의된 'web-network'에 이 컨테이너 연결
+
+networks: # Docker 네트워크 정의 섹션
+  web-network: # 네트워크 이름
+    external: true # 이 Compose 파일 외부에서 생성된 네트워크 사용 (기존 네트워크 참조)

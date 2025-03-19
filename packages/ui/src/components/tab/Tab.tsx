@@ -31,6 +31,8 @@ interface Props {
   className?: string;
   /** 탭 변경 시 호출되는 콜백 함수 */
   onChange?: (index: number) => void;
+  /** 탭 스타일 */
+  tabStyle?: 'basic' | 'chip';
 }
 
 /**
@@ -64,6 +66,7 @@ const Tab = ({
   activeIndex,
   className,
   onChange,
+  tabStyle = 'basic',
 }: Props) => {
   const [internalActiveTab, setInternalActiveTab] = useState(0);
 
@@ -101,6 +104,7 @@ const Tab = ({
       <S.TabItemView
         $isStickyTab={isStickyTab}
         $height={height}
+        $tabStyle={tabStyle}
       >
         {tabs.map((tab, index) => (
           <TabItem
@@ -112,6 +116,7 @@ const Tab = ({
             height={height}
             isFixedWidth={isFixedWidth}
             isBottomLineStretch={isBottomLineStretch}
+            tabStyle={tabStyle}
           />
         ))}
       </S.TabItemView>

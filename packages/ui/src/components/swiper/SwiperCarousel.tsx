@@ -1,3 +1,8 @@
+'use client';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+
 import { JSX } from 'react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { SwiperProps, SwiperSlide } from 'swiper/react';

@@ -1,17 +1,18 @@
 import { ChangeEvent } from 'react';
-import Button, { BtnSize } from '@ui/components/button/Button';
-import Input from '@ui/components/input/Input';
 
-interface Props {
+import * as S from './QuantityCounter.style';
+import SvgIcon from '@ui/commons/SvgIcon';
+import { colors } from '@ui/styles/theme';
+
+type Props = {
   quantity: number;
   setQuantity: (quantity: number) => void;
-  size?: BtnSize;
-  width?: number;
+
   maxValue?: number;
   minValue?: number;
-}
+};
 
-const QuantityCounter = ({ quantity, setQuantity, size = 'xsm', minValue = 1, width, maxValue = 999 }: Props) => {
+const QuantityCounter = ({ quantity, setQuantity, minValue = 1, maxValue = 999 }: Props) => {
   const max = maxValue > 999 ? 999 : maxValue;
   const plusQuantity = () => {
     if (max) {
@@ -45,30 +46,32 @@ const QuantityCounter = ({ quantity, setQuantity, size = 'xsm', minValue = 1, wi
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <Button
-        title={'-'}
-        btnType='tertiary'
+    <S.Container>
+      <S.QuntitiyBtn
         onClick={minusQuantity}
-        size={size}
-        width={width}
-      />
-      <Input
+        disabled={quantity === minValue}
+      >
+        <SvgIcon
+          path={'/ui/svg/ico_minus.svg'}
+          tintColor={quantity === minValue ? colors.icon4 : colors.text3}
+        />
+      </S.QuntitiyBtn>
+      <S.QuntityInput
         name='name'
         type='number'
         value={quantity.toString()}
         onChange={handleChange}
-        width={100}
-        height='xsm'
       />
-      <Button
-        title={'+'}
-        btnType='tertiary'
+      <S.QuntitiyBtn
         onClick={plusQuantity}
-        size={size}
-        width={width}
-      />
-    </div>
+        disabled={quantity === maxValue}
+      >
+        <SvgIcon
+          path={'/ui/svg/ico_plus.svg'}
+          tintColor={quantity === maxValue ? colors.icon4 : colors.text3}
+        />
+      </S.QuntitiyBtn>
+    </S.Container>
   );
 };
 

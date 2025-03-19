@@ -19,6 +19,7 @@ export const HeaderContainer = styled.header<{ $isStick: boolean; $isWebView: bo
 
 export const LeftSection = styled.div`
   display: flex;
+  position: absolute;
   align-items: center;
   justify-content: center;
 `;

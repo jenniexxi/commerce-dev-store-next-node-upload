@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import * as S from './Toast.style';
+import { T } from '@ui/commons';
+import { colors } from '@ui/styles/theme';
 
 interface ToastProps {
   id: string;
@@ -28,7 +30,7 @@ export default function Toast({ message, duration, onClose, id, bottom }: ToastP
       $isClosing={isClosing}
       $bottom={bottom}
     >
-      {message}
+      <T.Body2_Normal $color={colors.text1}>{message}</T.Body2_Normal>
     </S.ToastWrapper>
   );
 }

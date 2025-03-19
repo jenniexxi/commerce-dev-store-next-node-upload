@@ -1,15 +1,18 @@
 import { DisplayGoodsSortTypeCode } from 'type';
-import { APIResponse, axiosInstance } from './api';
-import { DisplayUrl } from './urls';
+import { AxiosResponse } from 'axios';
 import {
-  getMainDisplayInfoRep,
+  GetMainCustomGoodsResp,
+  GetMainCustomRecommendResp,
+  GetMainDisplayInfoResp,
+  GetMainInfoResp,
   // SalesListData,
   SearchAutoCompleteResp,
   SearchGoodsResult,
   SearchInfoResp,
   SearchResultListResp,
 } from 'type/api/display';
-import { AxiosResponse } from 'axios';
+import { APIResponse, axiosInstance } from './api';
+import { DisplayUrl } from './urls';
 
 export const DisplayAPI = {
   // getSalesList: (page: number, size: number, goodsSortTypeEnum: DisplayGoodsSortTypeCode) => {
@@ -86,11 +89,18 @@ export const DisplayAPI = {
       .then((resp) => resp.data)
       .catch((e) => console.log(e));
   },
-  getMainDisplayInfo: () => {
-    return axiosInstance
-      .get<AxiosResponse<getMainDisplayInfoRep>>(DisplayUrl.getMainDisplayInfo)
-      .then((resp) => resp.data);
-  },
+  getMainDisplayInfo: () =>
+    axiosInstance.get<AxiosResponse<GetMainDisplayInfoResp>>(DisplayUrl.getMainDisplayInfo).then((resp) => resp.data),
+  getMainInfo: () =>
+    axiosInstance.get<AxiosResponse<GetMainInfoResp>>(DisplayUrl.getMainInfo).then((resp) => resp.data),
+  getMainCustomGoods: (mainGroupId: number) =>
+    axiosInstance
+      .get<AxiosResponse<GetMainCustomGoodsResp>>(DisplayUrl.getMainCustomGoods, { params: { mainGroupId } })
+      .then((resp) => resp.data),
+  getMainCustomRecommend: (mainGroupId: number) =>
+    axiosInstance
+      .get<AxiosResponse<GetMainCustomRecommendResp>>(DisplayUrl.getMainCustomRecommend, { params: { mainGroupId } })
+      .then((resp) => resp.data),
 };
 
 export default DisplayAPI;

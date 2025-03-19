@@ -4,9 +4,11 @@ const styled = { createGlobalStyle };
 
 const GlobalStyles = styled.createGlobalStyle`
   .svg {
+    vertical-align: text-top;
+
     * {
       fill: currentcolor;
-      stroke: currentcolor;
+      stroke: none;
     }
   }
 `;

@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import * as S from './ToggleSwitch.style';
 
-export interface Props {
+export type Props = {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   size?: S.Size;
-}
+};
 
 const ToggleSwitch = ({ checked = false, onChange, disabled = false, size = 'medium' }: Props) => {
   const handleChange = useCallback(() => {

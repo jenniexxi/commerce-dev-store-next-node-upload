@@ -8,6 +8,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y';
 import pluginReact from 'eslint-plugin-react';
 import globals from 'globals';
 import pluginReactHooks from 'eslint-plugin-react-hooks';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 /**
  * A shared ESLint configuration for the repository.
@@ -234,6 +235,14 @@ export const config = [
           'alphabetize': { order: 'ignore', caseInsensitive: true },
         },
       ],
+    },
+  },
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
+      'simple-import-sort/exports': 'error',
     },
   },
   {

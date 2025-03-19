@@ -1,7 +1,6 @@
-//import SvgIcon from '@ui/commons/SvgIcon';
-// import { colors } from '@ui/styles/theme';
-// import R from '@ui/utils/resourceMapper';
+import SvgIcon from '@ui/commons/SvgIcon';
 import * as S from './Button.style';
+import { colors } from '@ui/styles/theme';
 
 interface Props {
   onClick: () => void;
@@ -17,11 +16,7 @@ interface Props {
   tintColor?: string;
 }
 
-const CloseButton = ({
-  onClick,
-  /* size = 20 ,*/ closeBtnPosition,
-  className /*  tintColor = colors.icon3 */,
-}: Props) => {
+const CloseButton = ({ onClick, size = 20, closeBtnPosition, className, tintColor = colors.icon3 }: Props) => {
   return (
     <S.CloseButton
       onClick={(e) => {
@@ -31,16 +26,12 @@ const CloseButton = ({
       $closeBtnPosition={closeBtnPosition}
       className={className}
     >
-      {/* <CloseButtonSVG
-        size={size}
-        strokeWidth={strokeWidth}
-      /> */}
-      {/* <SvgIcon
-        name={R.svg.icoClose}
+      <SvgIcon
+        path={'/ui/svg/ico_close.svg'}
         tintColor={tintColor}
         width={size}
         height={size}
-      /> */}
+      />
     </S.CloseButton>
   );
 };

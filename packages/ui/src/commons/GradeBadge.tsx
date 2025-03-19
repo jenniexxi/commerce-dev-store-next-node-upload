@@ -1,5 +1,11 @@
-import R from '@ui/utils/resourceMapper';
-import SvgIcon from './SvgIcon';
+// import R from '@ui/utils/resourceMapper';
+import IcoBadgeR1 from '@ui/svg/ico_badge_r1.svg';
+import IcoBadgeR2 from '@ui/svg/ico_badge_r2.svg';
+import IcoBadgeR3 from '@ui/svg/ico_badge_r3.svg';
+import IcoBadgeR4 from '@ui/svg/ico_badge_r4.svg';
+import IcoBadgeR5 from '@ui/svg/ico_badge_r5.svg';
+import IcoBadgeS from '@ui/svg/ico_badge_s.svg';
+// import SvgIcon from './SvgIcon';
 
 export type GradeName = 'S' | 'R1' | 'R2' | 'R3' | 'R4' | 'R5';
 interface Props {
@@ -10,48 +16,42 @@ const GradeBadge = ({ gradeName }: Props) => {
   switch (gradeName) {
     case 'R1':
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeR1}
+        <IcoBadgeR1
           width={16}
           height={16}
         />
       );
     case 'R2':
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeR2}
+        <IcoBadgeR2
           width={16}
           height={16}
         />
       );
     case 'R3':
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeR3}
+        <IcoBadgeR3
           width={16}
           height={16}
         />
       );
     case 'R4':
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeR4}
+        <IcoBadgeR4
           width={16}
           height={16}
         />
       );
     case 'R5':
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeR5}
+        <IcoBadgeR5
           width={16}
           height={16}
         />
       );
     default:
       return (
-        <SvgIcon
-          name={R.svg.icoBadgeS}
+        <IcoBadgeS
           width={16}
           height={16}
         />

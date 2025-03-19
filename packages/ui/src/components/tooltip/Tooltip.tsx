@@ -5,12 +5,12 @@ import CloseButton from '@ui/components/button/CloseButton';
 import { colors } from '@ui/styles/theme';
 import * as S from './Tooltip.style';
 
-interface TooltipItem {
+type TooltipItem = {
   title: string | JSX.Element;
   content: string | JSX.Element;
-}
+};
 
-interface TooltipProps {
+type TooltipProps = {
   items: TooltipItem[];
   className?: string;
   position?: 'top' | 'bottom';
@@ -22,7 +22,7 @@ interface TooltipProps {
     arrowStyle?: React.CSSProperties;
   };
   closeBtnPosition?: { top?: number; right?: number; bottom?: number; left?: number };
-}
+};
 
 const Tooltip = ({
   items,

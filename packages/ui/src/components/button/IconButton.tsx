@@ -1,27 +1,33 @@
-import SvgIcon from '@ui/commons/SvgIcon';
+import { ReactNode } from 'react';
 import * as S from './Button.style';
+import SvgIcon from '@ui/commons/SvgIcon';
 
 interface Props {
-  img: string;
+  path?: string;
   btnSize?: number;
   imgSize?: number;
   tintColor?: string;
   onClick?: () => void;
   className?: string;
+  children?: ReactNode;
 }
-const IconButton = ({ img, btnSize = 24, imgSize = 24, tintColor, onClick, className }: Props) => {
+const IconButton = ({ btnSize = 24, onClick, className, imgSize = 24, tintColor, children, path }: Props) => {
   return (
     <S.IconButton
       $size={btnSize}
       onClick={onClick}
       className={className}
     >
-      <SvgIcon
-        name={img}
-        tintColor={tintColor}
-        width={imgSize}
-        height={imgSize}
-      />
+      {path ? (
+        <SvgIcon
+          path={path}
+          tintColor={tintColor}
+          width={imgSize}
+          height={imgSize}
+        />
+      ) : (
+        children
+      )}
     </S.IconButton>
   );
 };

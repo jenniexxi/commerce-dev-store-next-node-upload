@@ -1,7 +1,7 @@
 import { JSX } from 'react';
-import { BtnSize, BtnType } from '@ui/components/button/Button';
+import { BtnSize, BtnType } from '../button/Button';
 
-export type ModalTypes = 'center' | 'topSheet' | 'bottomSheet' | 'full';
+export type ModalTypes = 'center' | 'topSheet' | 'bottomSheet' | 'full' | 'expandableBottomSheet';
 export type ButtonType = 'multi' | 'single';
 
 export interface BaseModalData {

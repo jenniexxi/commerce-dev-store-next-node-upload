@@ -38,7 +38,7 @@ export default function ModalContainer() {
             <TextModal
               key={modalData.id}
               {...modalProps}
-              title={modalData.title}
+              title={modalData.title.toString()}
               content={modalData.content}
               buttonType={modalData.buttonType}
               rightTitle={modalData.rightTitle}

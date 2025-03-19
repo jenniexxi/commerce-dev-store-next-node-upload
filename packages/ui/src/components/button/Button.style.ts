@@ -1,7 +1,22 @@
+'use client';
+
 import styled, { css } from 'styled-components';
 import { fonts } from '@ui/styles/theme';
 import { pxToRem } from '@ui/utils/display';
 import { BtnSize, BtnType } from './Button';
+
+export const TextButton = styled.button<{ $fontType: keyof typeof fonts; $color: string }>`
+  display: flex;
+  align-items: center;
+  ${({ $fontType }) => fonts[$fontType]};
+  min-width: auto;
+  flex-shrink: 0;
+  ${({ $color }) =>
+    $color &&
+    css`
+      color: ${$color};
+    `}
+`;
 
 export const Button = styled.button<{
   $btnType: BtnType;
@@ -15,6 +30,7 @@ export const Button = styled.button<{
   align-items: center;
   padding: 0 2.4rem;
   min-width: auto;
+  flex-shrink: 0;
 
   ${({ $align }) =>
     $align &&
@@ -24,9 +40,13 @@ export const Button = styled.button<{
 
   ${({ $width }) =>
     $width && typeof $width === 'number'
-      ? css`
-          width: ${pxToRem($width)};
-        `
+      ? $width === 1
+        ? css`
+            flex: 1;
+          `
+        : css`
+            width: ${pxToRem($width)};
+          `
       : css`
           width: ${$width};
         `}
@@ -34,32 +54,33 @@ export const Button = styled.button<{
     switch ($btnType) {
       case 'tertiary':
         return css`
-          border: 1px solid ${theme.colors?.line3};
-          background-color: ${theme.colors?.background1};
-          color: ${disabled ? theme.colors?.status_disabled : theme.colors?.text3};
+          background-color: ${theme.colors.background1};
+          color: ${disabled ? theme.colors.status_disabled : theme.colors.text3};
+          border: 1px solid ${theme.colors.line3};
         `;
       case 'secondary':
         return css`
-          background-color: ${disabled ? theme.colors?.status_disabled : theme.colors?.background2};
-          color: ${disabled ? theme.colors?.text1 : theme.colors?.text3};
+          background-color: ${disabled ? theme.colors.status_disabled : theme.colors.background2};
+          color: ${disabled ? theme.colors.text1 : theme.colors.text3};
         `;
       case 'text':
         return css`
-          color: ${theme.colors?.text5};
+          color: ${theme.colors.text5};
         `;
       case 'highlight':
         return css`
-          background-color: ${theme.colors?.primary1};
-          color: ${theme.colors?.text3};
+          color: ${theme.colors.text3};
+          background-color: ${theme.colors.primary1};
         `;
+
       case 'primary':
       default:
         return css`
-          background-color: ${disabled ? theme.colors?.status_disabled : theme.colors?.text3};
-          color: ${$size === 'lg' ? theme.colors?.primary1 : theme.colors?.text1};
+          background-color: ${disabled ? theme.colors.status_disabled : theme.colors.text3};
+          color: ${$size === 'lg' ? theme.colors.primary1 : theme.colors.text1};
           ${disabled &&
           css`
-            color: ${theme.colors?.white};
+            color: ${theme.colors.white};
           `};
         `;
     }
@@ -68,29 +89,30 @@ export const Button = styled.button<{
     switch ($size) {
       case 'md':
         return css`
-          height: 4.8rem;
           border-radius: 1.2rem;
+          padding: 0 1.6rem;
+          height: 4.8rem;
           ${fonts.body1_normalb};
         `;
       case 'sm':
         return css`
-          height: 4.4rem;
-          padding: 0 2rem;
           border-radius: 1.2rem;
+          height: 4.4rem;
           ${fonts.body2_normalb};
+          padding: 0 2rem;
         `;
       case 'xsm':
         return css`
-          height: 3.4rem;
-          padding: 0 1.2rem;
           border-radius: 0.8rem;
+          height: 3.4rem;
           ${fonts.body3_normalm};
+          padding: 0 1.2rem;
         `;
       case 'lg':
       default:
         return css`
-          height: 5.6rem;
           border-radius: 1.6rem;
+          height: 5.6rem;
           ${fonts.body1_normalb};
         `;
     }
@@ -98,7 +120,7 @@ export const Button = styled.button<{
     ${({ $textHighLight, theme, disabled }) =>
     $textHighLight &&
     css`
-      color: ${disabled ? theme.colors?.white : theme.colors?.primary1};
+      color: ${disabled ? theme.colors.white : theme.colors.primary1};
     `}
 `;
 export const IconDivider = styled.span`
@@ -124,12 +146,7 @@ export const TwoButtonContainer = styled.div<{ $direction: 'column' | 'row' }>`
 
 //close button wrap
 export const CloseButton = styled.button<{
-  $closeBtnPosition?: {
-    top?: number;
-    right?: number;
-    bottom?: number;
-    left?: number;
-  };
+  $closeBtnPosition?: { top?: number; right?: number; bottom?: number; left?: number };
 }>`
   ${({ $closeBtnPosition }) => {
     if ($closeBtnPosition) {

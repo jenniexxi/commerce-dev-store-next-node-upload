@@ -4,13 +4,14 @@ import { Button, TwoButton } from '@ui/components';
 import { TwoButtonProps } from '@ui/components/button/TwoButton';
 import Modal, { ModalProps } from './Modal';
 import * as S from './Modal.style';
+import { colors } from '@ui/styles/theme';
 
 type ButtonType = 'multi' | 'single';
 
 export type TextModalProps = TwoButtonProps &
   ModalProps & {
     buttonType?: ButtonType;
-    title: string | JSX.Element;
+    title: string;
     content?: string;
   };
 
@@ -28,11 +29,11 @@ const TextModal = ({ title, content, buttonType = 'single', onHide, ...props }: 
       <S.TextModalWrapper>
         <T.Headline2B>{title}</T.Headline2B>
 
-        <p>{content}</p>
+        <T.Body1_Normal $color={colors.text4}>{content}</T.Body1_Normal>
         {buttonType === 'single' ? (
           <Button
             btnType={props.rightType}
-            title={props.rightTitle || '확인'}
+            title={props.rightTitle}
             size={props.size}
             onClick={props.rightonClick ? props.rightonClick : onHide}
             width='100%'

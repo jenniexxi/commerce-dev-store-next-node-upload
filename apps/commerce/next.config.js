@@ -2,9 +2,23 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@repo/ui', '@repo/typescript-config', '@repo/eslint-config'],
+  transpilePackages: ['@repo/ui', '@repo/typescript-config', '@repo/eslint-config', '@svgr/webpack'],
   compiler: {
     styledComponents: true,
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'dqi4lqyhv0tl1.cloudfront.net',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
+        pathname: '/**',
+      },
+    ],
   },
 
   webpack(config) {
@@ -46,8 +60,8 @@ const nextConfig = {
   rewrites() {
     return [
       {
-        source: '/:path*',
-        destination: `${process.env.NEXT_PUBLIC_COMMERCE_API_BASE_URL}/:path*`,
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_COMMERCE_API_BASE_URL}/api/:path*`,
       },
     ];
   },

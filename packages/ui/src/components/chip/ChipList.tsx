@@ -1,8 +1,9 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
-import SvgIcon from '@ui/commons/SvgIcon';
-import R from '@ui/utils/resourceMapper';
 import Chip from './Chip';
 import * as S from './ChipList.style';
+import SvgIcon from '@ui/commons/SvgIcon';
 
 export interface ScrollScreen {
   isFilter?: boolean;
@@ -90,7 +91,7 @@ const ChipList = <T,>({
             onClick={onClickFilter}
           >
             <SvgIcon
-              name={R.svg.icoFilter}
+              path={'/ui/svg/ico_filter.svg'}
               width={16}
               height={16}
             />
@@ -103,14 +104,11 @@ const ChipList = <T,>({
         return (
           <Chip
             key={i.value + ''}
-            label={i.label}
-            value={i.value}
             chipType={chipType}
             colorType={colorType}
             isSelected={selectValue.includes(i.value)}
-            disabled={i.disabled}
-            hasChild={i.hasChild}
             onClickChip={handleChipClick}
+            {...i}
           />
         );
       })}

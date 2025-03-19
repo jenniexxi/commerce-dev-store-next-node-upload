@@ -11,6 +11,7 @@
       "apis/*": ["apis/*"],
       "app/*": ["app/*"],
       "components/*": ["components/*"],
+      "constants/*": ["constants/*"],
       "hooks/*": ["hooks/*"],
       "providers/*": ["providers/*"],
       "public/*": ["public/*"],
@@ -19,6 +20,9 @@
       "utils/*": ["utils/*"],
       "assets/*": ["public/assets/*"],
       "ui/*": ["public/ui/*"],
+      "@ui/svg/*": ["../../packages/ui/src/assets/svg/*"],
+      "@ui/lottie/*": ["../../packages/ui/src/assets/lottie/*"],
+      "@ui/images/*": ["../../packages/ui/src/assets/images/*"],
       "@ui/*": ["../../packages/ui/src/*"]
     },
     "jsx": "preserve"
@@ -30,7 +34,7 @@
     "next.config.js",
     ".next/types/**/*.ts",
     "eslint.config.js",
-    "type/svgr.d.ts"
+    "../../global-types/**.d.ts"
   ],
   "exclude": ["node_modules", ".next", "resourceMapper.ts"]
 }

@@ -1,5 +1,6 @@
 import { Cookies } from 'react-cookie';
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import { useAuthStore } from '@ui/stores';
 
 export type APIResponse = {
   success: boolean;
@@ -26,7 +27,7 @@ export const cookieManager = {
 };
 
 export const axiosInstance: AxiosInstance = axios.create({
-  //baseURL: process.env.NEXT_PUBLIC_COMMERCE_API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_COMMERCE_API_BASE_URL,
   timeout: 10000,
   withCredentials: true,
   headers: {
@@ -119,8 +120,7 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers['SESSION'] = session;
   }
   // 회원
-  config.headers['Authorization'] =
-    `Bearer eyJraWQiOiJFMDQ3NTA0Q0Y5NUYwNzI0QUU1ODc3QTk0NjRFRjBCMSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJURVNUMDEwQ09NTUVSQ0UiLCJpc3MiOiJodHRwOi8vMTAuMjEzLjMxLjI0ODo5MDkzL2FjY291bnQvYXV0aHNlcnZlciIsInVzZXJTZXEiOjEsImF1dGhvcml0aWVzIjpbIlVTRVIiLCJSRVNPVVJDRSJdLCJwbGF0Zm9ybXMiOlt7InBsYXRmb3JtQ2QiOiIwMTBDT01NRVJDRSIsInBsYXRmb3JtVXNlclNlcSI6IiJ9XSwiYXVkIjoicnJvdW5kY2xpZW50MSIsIm5iZiI6MTczNzA4NzE3Mywic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MzI1MDM2Nzk5OTksImlhdCI6MTczNzA4NzE3MywianRpIjoiZTA2YTQ4MWYtZTlhOC00NWYyLTg2MzUtMTI1YWI3ZTExMWE5IiwiYXV0aERldmljZVNlcSI6MX0.ZpOwbDzEFZtkRbxXoGFllvFu3mLNpzK2XmJ3Cd-UWey17wfwYBhYrODRDAdB8RMFC_rTRArtYSh6i75wDXuYTsPJoBGOfFKMyglZa14zpgPinabiCH1C2MykUDJLzCj_M6SiRRWJ9_5YNMRtpdww1AA-x_FJMLBVjAB7LzKELx0SYdNkDgGbZp9zMcuWdtrI6LsSW44EUkQlhOsdpkYNt3KEm5_iqlA7-6slCnHvUgo6ZFGlwJb03Fa2g2VZFKlDmJB7vELt00Dez-sIh-SEvpuyP8m0-CXg0NnKxT6j5qruUtkFQKX7e3E_pv3gKVO8x1VxK3XZW0GJi3idfG3azg`;
+  config.headers['Authorization'] = `Bearer ${useAuthStore.getState().token}`;
 
   // config.headers['Authorization'] = `Basic cnJvdW5kY2xpZW50Mjpycm91bmRjbGllbnQyc2VjcmV0==`;
   return config;

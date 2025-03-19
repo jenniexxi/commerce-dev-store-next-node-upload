@@ -16,6 +16,8 @@ interface Props {
   leftDisabled?: boolean;
   rightDisabled?: boolean;
   alignButton?: 'column' | 'row';
+  leftBtnProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
+  rightBtnProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
 export type TwoButtonProps = Props;
@@ -23,10 +25,10 @@ export type TwoButtonProps = Props;
 const TwoButton = ({
   leftType = 'tertiary',
   leftonClick,
-  leftTitle = '취소',
+  leftTitle = '아니요',
   rightType = 'primary',
   rightonClick,
-  rightTitle = '확인',
+  rightTitle = '예',
   size = 'lg',
   leftSize = 1,
   rightSize = 1,
@@ -34,6 +36,8 @@ const TwoButton = ({
   leftDisabled = false,
   rightDisabled = false,
   alignButton = 'row',
+  leftBtnProps = {},
+  rightBtnProps = {},
 }: Props) => {
   let leftStyle;
   if (alignButton === 'column') {
@@ -53,6 +57,7 @@ const TwoButton = ({
           $width='100%'
           $align='center'
           onClick={leftonClick}
+          {...leftBtnProps}
         >
           {leftTitle}
         </S.Button>
@@ -65,6 +70,7 @@ const TwoButton = ({
           $width='100%'
           $align='center'
           onClick={rightonClick}
+          {...rightBtnProps}
         >
           {rightTitle}
         </S.Button>

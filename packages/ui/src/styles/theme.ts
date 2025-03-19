@@ -1,3 +1,5 @@
+'use client';
+
 import { css } from 'styled-components';
 
 export const common = {
@@ -9,7 +11,7 @@ export const neutral = {
   5: '#f6f6f9',
   10: '#e5e5e8',
   20: '#d1d1d5',
-  30: '#b0b0b0',
+  30: '#b0b0b3',
   40: '#888888',
   50: '#6d6d6d',
   60: '#5d5d5d',
@@ -32,7 +34,7 @@ export const neutral = {
 //   90: '#',
 //   95: '#',
 // };
-const redOrange = {
+export const redOrange = {
   5: '#fff6ed',
   10: '#ffead4',
   20: '#ffd2a8',
@@ -45,7 +47,7 @@ const redOrange = {
   90: '#7f250f',
   95: '#450f05',
 };
-const yellowGreen = {
+export const yellowGreen = {
   5: '#fcffe5',
   10: '#f7ffc7',
   20: '#eeff95',
@@ -58,7 +60,7 @@ const yellowGreen = {
   90: '#3f5710',
   95: '#203003',
 };
-const red = {
+export const red = {
   5: '#fff0f2',
   10: '#ffdde1',
   20: '#ffc1c9',
@@ -71,7 +73,7 @@ const red = {
   90: '#900c1d',
   95: '#50000b',
 };
-const green = {
+export const green = {
   5: '#f0fdf4',
   10: '#ddfbe6',
   20: '#bdf5ce',
@@ -84,20 +86,20 @@ const green = {
   90: '#16512b',
   95: '#062d15',
 };
-// const blue = {
-//   5: '#eef5ff',
-//   10: '#d9e7ff',
-//   20: '#bcd5ff',
-//   30: '#8ebcff',
-//   40: '#5996ff',
-//   50: '#2465ff',
-//   60: '#1b4df5',
-//   70: '#1439e1',
-//   80: '#172fb6',
-//   90: '#192d8f',
-//   95: '#141d57',
-// };
-const purple = {
+export const blue = {
+  5: '#eef5ff',
+  10: '#d9e7ff',
+  20: '#bcd5ff',
+  30: '#8ebcff',
+  40: '#5996ff',
+  50: '#2465ff',
+  60: '#1b4df5',
+  70: '#1439e1',
+  80: '#172fb6',
+  90: '#192d8f',
+  95: '#141d57',
+};
+export const purple = {
   5: '#f9f5ff',
   10: '#f1e9fe',
   20: '#e5d7fd',
@@ -439,11 +441,11 @@ export const mixins = {
   ellipsis: (line = 1) => css`
     display: ${line > 1 ? '-webkit-box' : 'block'};
     overflow: hidden;
+    white-space: ${line > 1 ? 'normal' : 'nowrap'};
     word-wrap: break-word;
     -webkit-line-clamp: ${line};
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    white-space: ${line > 1 ? 'normal' : 'nowrap'};
   `,
 };
 

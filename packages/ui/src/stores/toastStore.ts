@@ -13,7 +13,7 @@ export type ToastState = {
   toasts: ToastData[];
 };
 export type ToastActions = {
-  addToast: (message: string, id?: string, duration?: number, bottom?: number) => void;
+  addToast: (message: string, duration?: number, bottom?: number, id?: string) => void;
   removeToast: (id: string) => void;
 };
 
@@ -26,9 +26,20 @@ export const initState: ToastState = {
 export const useToastStore = create<ToastStore>()(
   devtools((set) => ({
     ...initState,
-    addToast: (message: string, id = uuidv4(), duration = 3000, bottom = 10) =>
+    addToast: (message: string, duration = 3000, bottom = 10, id = uuidv4()) =>
       set(
-        (state) => ({ toasts: [...state.toasts, { id, message, duration, bottom }] }),
+        (state) => {
+          // 동일한 ID를 가진 토스트가 이미 존재하는지 확인
+          const toastExists = state.toasts.some((toast) => toast.id === id);
+
+          // 이미 존재하면 상태를 변경하지 않고 그대로 반환
+          if (toastExists) {
+            return { toasts: state.toasts };
+          }
+
+          // 존재하지 않으면 새로운 토스트 추가
+          return { toasts: [...state.toasts, { id, message, duration, bottom }] };
+        },
         undefined,
         'toastStore/addToast',
       ),

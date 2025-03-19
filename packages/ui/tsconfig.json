@@ -8,20 +8,24 @@
     "baseUrl": "./src",
     "paths": {
       "@ui/svg/*": ["assets/svg/*"],
+      "@ui/lottie/*": ["assets/lottie/*"],
       "@ui/images/*": ["assets/images/*"],
       "@ui/apis/*": ["apis/*"],
       "@ui/commons": ["commons"],
       "@ui/commons/*": ["commons/*"],
       "@ui/components": ["components"],
       "@ui/components/*": ["components/*"],
+      "@ui/constants": ["constants"],
+      "@ui/constants/*": ["constants/*"],
       "@ui/hooks/*": ["hooks/*"],
       "@ui/stores": ["stores"],
       "@ui/stores/*": ["stores/*"],
       "@ui/styles/*": ["styles/*"],
       "@ui/type/*": ["type/*"],
+      "@ui/utils": ["utils"],
       "@ui/utils/*": ["utils/*"]
     }
   },
-  "include": ["src", "eslint.config.mjs"],
+  "include": ["src", "eslint.config.mjs", "../../global-types/**.d.ts"],
   "exclude": ["node_modules", "dist", "resourceMapper.ts"]
 }

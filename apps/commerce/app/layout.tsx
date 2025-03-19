@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Layout from 'components/layouts/Layout';
 import GlobalUiProvider from 'providers/GlobalUiProvider';
 import QueryProviders from 'providers/QueryProvider';
 import { StoreProvider } from 'providers/StoreProvider';
@@ -16,10 +17,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
+      <head>
+        <link
+          rel='stylesheet'
+          type='text/css'
+          href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css'
+        />
+      </head>
       <body>
         <QueryProviders>
           <StoreProvider>
-            <GlobalUiProvider>{children}</GlobalUiProvider>
+            <GlobalUiProvider>
+              <div id='root'>
+                <Layout>{children}</Layout>
+              </div>
+            </GlobalUiProvider>
           </StoreProvider>
         </QueryProviders>
       </body>

@@ -1,5 +1,7 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
-import { useHeaderStore } from '@ui/stores/useHeaderStore';
+import { useHeaderStore } from '@ui/stores';
 
 export interface HeaderConfig {
   leftCallback?: () => void;
@@ -40,7 +42,7 @@ export interface HeaderConfig {
  */
 
 export const useHeader = (title: string, config: Partial<HeaderConfig> = {}) => {
-  const updateHeader = useHeaderStore((state) => state.updateHeader);
+  const { updateHeader } = useHeaderStore((state) => state);
   const mountedRef = useRef(false);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export const useHeader = (title: string, config: Partial<HeaderConfig> = {}) => 
       showHeader: true,
       showTitle: true,
       showLeftButton: true,
-      showRightButton: true,
+      showRightButton: false,
       showBottomBorder: false,
       onLeftClick: config.leftCallback,
       onRightClick: config.rightCallback,
@@ -72,7 +74,7 @@ export const useHeader = (title: string, config: Partial<HeaderConfig> = {}) => 
         showRightButton: false,
       });
     };
-  }, [title, config, updateHeader]);
+  }, []);
 
   // 마운트 여부 반환 (필요한 경우 사용)
   return mountedRef.current;

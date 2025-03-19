@@ -1,6 +1,7 @@
+'use client';
+
 import styled from 'styled-components';
 import { fonts } from '@ui/styles/theme';
-// import R from '@ui/utils/resourceMapper';
 
 export const CheckboxContainer = styled.div`
   display: flex;
@@ -18,16 +19,16 @@ export const CheckboxInput = styled.input`
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 1.2rem;
-  // background-image: url(R.svg.icoCheckCircleFillOff);
+  background-image: url('/ui/svg/ico_check_circle_fill_off.svg');
   &:checked {
-    // background-image: url(R.svg.icoCheckCircleFillOn);
+    background-image: url('/ui/svg/ico_check_circle_fill_on.svg');
   }
   & + label {
     margin-left: 8px;
   }
   &:disabled,
   &[disabled] {
-    // background-image: url(R.svg.icoCheckCircleDisabled);
+    background-image: url('/ui/svg/ico_check_circle_disabled.svg');
   }
 `;
 

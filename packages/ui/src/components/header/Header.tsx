@@ -1,18 +1,17 @@
 'use client';
 
-import React, { ReactNode, useEffect, useState } from 'react';
-import { useNavigate, useNavigationType } from 'react-router-dom';
-// import SvgIcon from '@ui/commons/SvgIcon';
+import { ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 import CloseButton from '@ui/components/button/CloseButton';
-import { useHeaderStore } from '@ui/stores/useHeaderStore';
-//import R from '@ui/utils/resourceMapper';
+import { useHeaderStore } from '@ui/stores/headerStore';
 import webviewbridge from '@ui/utils/webviewbridge';
+import IconPageBack from '@ui/svg/ico_page_back.svg';
 import * as S from './Header.style';
 
 /**
  * 헤더 컴포넌트 속성 인터페이스
  */
-interface HeaderProps {
+type HeaderProps = {
   showHeader?: boolean;
   showLeftButton?: boolean;
   showTitle?: boolean;
@@ -24,12 +23,13 @@ interface HeaderProps {
   onRightClick?: () => void;
   isStick?: boolean;
   backColor?: string;
-}
+};
 /**
  * 헤더 컴포넌트
  * 상단에 표시되는 헤더 렌더링
  */
-const Header: React.FC<HeaderProps> = ({
+
+export default function Header({
   showHeader = true,
   showLeftButton = true,
   showTitle = true,
@@ -41,23 +41,26 @@ const Header: React.FC<HeaderProps> = ({
   onRightClick,
   isStick = true,
   backColor,
-}) => {
-  const isReady = useHeaderStore((state) => state.isReady);
-  const navigate = useNavigate();
+}: HeaderProps) {
+  const { isReady } = useHeaderStore((state) => state);
+  const router = useRouter();
+
   /** 뒤로 가기 핸들러 */
-  const handleBack = () => navigate(-1);
-  const navType = useNavigationType();
+  const handleBack = () => router.back();
+
+  // TODO: 사용 확인 후 처리 필요
+  /* const navType = useNavigationType();
   const [_, setCanGoBack] = useState(false);
 
   useEffect(() => {
     setCanGoBack(navType === 'PUSH');
-  }, [navType]);
+  }, [navType]); */
 
   /** 닫기 핸들러 */
   const handleClose = () => {
     if (window.history.length > 1) {
       // 이전 페이지가 있는 경우
-      navigate(-1);
+      router.back();
     } else {
       // 이전 페이지가 없는 경우 웹뷰 닫기
       webviewbridge.close();
@@ -72,11 +75,11 @@ const Header: React.FC<HeaderProps> = ({
       }
       return (
         <S.BackButton onClick={onLeftClick || handleBack}>
-          {/* <SvgIcon
-            name={R.svg.icoPageBack}
+          <IconPageBack
+            className='svg'
             width={24}
             height={24}
-          /> */}
+          />
         </S.BackButton>
       );
     }
@@ -106,6 +109,4 @@ const Header: React.FC<HeaderProps> = ({
       <S.RightSection>{renderRightElement()}</S.RightSection>
     </S.HeaderContainer>
   );
-};
-
-export default Header;
+}

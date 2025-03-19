@@ -1,22 +1,24 @@
+'use client';
+
 import styled from 'styled-components';
 
 export type Size = 'small' | 'medium' | 'large';
 
-export interface SizeConfig {
+export type SizeConfig = {
   width: number;
   height: number;
   sliderSize: number;
   sliderOffset: number;
   sliderMove: number;
-}
+};
 
 export type SizesConfig = Record<Size, SizeConfig>;
 
-export interface StyledProps {
+export type StyledProps = {
   $checked: boolean;
   $size: Size;
   disabled?: boolean;
-}
+};
 
 export const SIZES: SizesConfig = {
   small: {

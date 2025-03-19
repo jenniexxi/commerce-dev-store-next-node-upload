@@ -1,0 +1,14 @@
+{
+  "name": "commerce",
+  "port": 3000,
+  "domain": "ecommerce-dev.hectoinnovation.co.kr",
+  "ecrName": "rr-commerce-dev-store-react-node-ecr",
+  "ecsServiceName": "rr-commerce-dev-store-react-node-task-svc",
+  "ecsClusterName": "rr-dev-cluster",
+  "taskFamily": "rr-commerce-dev-store-react-node-task-define",
+  "containerName": "rr-commerce-dev-store-react-node-cont",
+  "cpu": 1024,
+  "memory": 2048,
+  "memoryReservation": 1024,
+  "logGroup": "/ecs/rr-commerce-dev-store-node-task-define"
+}

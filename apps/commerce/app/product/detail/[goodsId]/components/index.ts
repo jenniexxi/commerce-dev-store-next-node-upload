@@ -1,0 +1,14 @@
+export { default as BottomButton } from './BottomButton';
+export { default as ProductAnnouncement } from './ProductAnnouncement';
+export { default as ProductBanner } from './ProductBanner';
+export { default as ProductBuyModal } from './ProductBuyModal';
+export { default as ProductDetailTab } from './ProductDetailTab';
+export { default as ProductDileveryInfo } from './ProductDileveryInfo';
+export { default as ProductFeedbackAboveFour } from './ProductFeedbackAboveFour';
+export { default as ProductInfo } from './ProductInfo';
+export { default as ProductPointInfo } from './ProductPointInfo';
+export { default as ProductRecommended } from './ProductRecommended';
+export { default as ProductRelated } from './ProductRelated';
+export { default as ProductStoreBest } from './ProductStoreBest';
+export { default as ProductTag } from './ProductTag';
+export { default as ProductVideo } from './ProductVideo';

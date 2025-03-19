@@ -2,27 +2,29 @@
 
 import React, { ComponentType, JSX, Suspense, useEffect, useState } from 'react';
 import * as S from './Accordion.style';
+import SvgIcon from '@ui/commons/SvgIcon';
+import { Separator, T } from '@ui/commons';
+import IcoChevronUp from '@ui/svg/ico_chevron_up.svg';
+import IcoChevronDown from '@ui/svg/ico_chevron_down.svg';
 
-interface AccordionItem {
+type AccordionItem = {
   title: string | JSX.Element;
-  content: React.LazyExoticComponent<ComponentType<any>> | JSX.Element;
-}
+  content: React.LazyExoticComponent<React.ComponentType<any>> | JSX.Element;
+};
 
-interface AccordionProps {
+type AccordionProps = {
   items: AccordionItem[];
   defaultOpenIndex?: number | number[];
   isGroup?: boolean;
   isOpenAll?: boolean;
-}
+};
 
 const Accordion = ({ items, defaultOpenIndex = -1, isGroup = true, isOpenAll = false }: AccordionProps) => {
-  const initialIndexes = Array.isArray(defaultOpenIndex)
-    ? isGroup
-      ? [defaultOpenIndex[0]]
-      : defaultOpenIndex
-    : [defaultOpenIndex];
+  const initialIndexes = (
+    Array.isArray(defaultOpenIndex) ? (isGroup ? [defaultOpenIndex[0]] : defaultOpenIndex) : [defaultOpenIndex]
+  ) as number[];
 
-  const [activeIndexes, setActiveIndexes] = useState<(number | undefined)[]>(initialIndexes);
+  const [activeIndexes, setActiveIndexes] = useState<number[]>(initialIndexes);
 
   useEffect(() => {
     if (isOpenAll) {
@@ -53,21 +55,33 @@ const Accordion = ({ items, defaultOpenIndex = -1, isGroup = true, isOpenAll = f
   return (
     <>
       {items.map((item, index) => (
-        <S.Accordion
-          key={index}
-          $active={activeIndexes.includes(index)}
-        >
-          <S.AccordionTrigger onClick={() => handleClick(index)}>
-            {typeof item.title === 'string' ? <S.AccordionTitle>{item.title}</S.AccordionTitle> : item.title}
+        <React.Fragment key={item.title.toString() + index}>
+          <S.Accordion $active={activeIndexes.includes(index)}>
+            <S.AccordionTrigger onClick={() => handleClick(index)}>
+              {typeof item.title === 'string' ? <T.Headline2B>{item.title}</T.Headline2B> : item.title}
 
-            <S.AccordionArrow $active={activeIndexes.includes(index)} />
-          </S.AccordionTrigger>
-          {activeIndexes.includes(index) && (
-            <S.AccordionTarget>
-              <S.AccordionTargetInner>{renderContent(item.content)}</S.AccordionTargetInner>
-            </S.AccordionTarget>
-          )}
-        </S.Accordion>
+              {activeIndexes.includes(index) ? (
+                <SvgIcon
+                  path={'/ui/svg/ico_chevron_up.svg'}
+                  width={20}
+                  height={20}
+                />
+              ) : (
+                <SvgIcon
+                  path={'/ui/svg/ico_chevron_down.svg'}
+                  width={20}
+                  height={20}
+                />
+              )}
+            </S.AccordionTrigger>
+            {activeIndexes.includes(index) && (
+              <S.AccordionTarget>
+                <S.AccordionTargetInner>{renderContent(item.content)}</S.AccordionTargetInner>
+              </S.AccordionTarget>
+            )}
+          </S.Accordion>
+          <Separator $height={8} />
+        </React.Fragment>
       ))}
     </>
   );

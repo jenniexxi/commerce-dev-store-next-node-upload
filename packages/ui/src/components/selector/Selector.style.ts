@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { pxToRem } from '@ui/utils/display';
-// import R from '@ui/utils/resourceMapper';
 
 export const SelectContainer = styled.div<{ $width?: number; $disable: boolean }>`
   position: relative;
@@ -18,47 +17,46 @@ export const SelectContainer = styled.div<{ $width?: number; $disable: boolean }
 export const Selector = styled.div<{
   $selectedOption: any;
   $isOpen: boolean;
+  $isBottomPopup: boolean;
   $disable: boolean;
 }>`
   position: relative;
-  padding: 0 5.2rem 0 1.6rem;
-  min-height: 4.8rem;
   border: 1px solid ${({ theme }) => theme.colors.line3};
-  border-radius: 1.2rem;
+  min-height: 4.8rem;
   cursor: pointer;
   background-color: ${({ theme }) => theme.colors.background1};
+  padding: 0 3.5rem 0 1.6rem;
+  border-radius: 1.2rem;
   color: ${({ theme }) => theme.colors.text4};
   ${({ theme }) => theme.fonts.body1_normal};
   line-height: 4.6rem;
-
-  &::after {
+  &:after {
     display: inline-block;
     content: '';
+    background-repeat: no-repeat;
+    background-color: ${({ theme }) => theme.colors.icon2};
+    mask-image: url('/ui/svg/ico_chevron_left.svg');
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    ${({ $disable }) => $disable && css``}
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 2rem;
+    height: 2rem;
     position: absolute;
     top: 1.5rem;
     right: 1.6rem;
-
-    /* background-image: url(R.svg.icoChevronLeft); */
-    ${({ $disable }) =>
-      $disable &&
-      css`
-        filter: invert(69%) sepia(5%) saturate(0%) hue-rotate(0deg) brightness(85%) contrast(89%);
-      `}
-    background-repeat: no-repeat;
-    background-size: 2rem 2rem;
-    width: 2rem;
-    height: 2rem;
-
     transform: rotate(270deg);
   }
-  ${({ $isOpen, theme }) =>
+  ${({ $isOpen, $isBottomPopup, theme }) =>
     $isOpen &&
+    !$isBottomPopup &&
     css`
       border: 1px solid ${theme.colors.icon2};
+      border-bottom-color: ${({ theme }) => theme.colors.line3};
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-
-      &::after {
+      &:after {
         transform: rotate(90deg);
       }
     `}
@@ -66,19 +64,19 @@ export const Selector = styled.div<{
     $disable &&
     css`
       background-color: ${theme.colors.background2};
-      color: ${theme.colors.icon4};
+      color: ${theme.colors.text3};
     `}
 `;
 
 export const OptionContainer = styled.ul`
-  position: absolute;
-  z-index: 1;
   width: 100%;
-  margin-top: -1px;
   border: 1px solid ${({ theme }) => theme.colors.icon2};
-  background-color: white;
+  border-top: none;
+  margin-top: -1px;
   max-height: 200px;
   overflow-y: auto;
+  background-color: white;
+  z-index: 1;
   border-bottom-left-radius: 1.2rem;
   border-bottom-right-radius: 1.2rem;
   border-top: 1px solid ${({ theme }) => theme.colors.line3};
@@ -92,9 +90,7 @@ export const Option = styled.li<{ $disabled?: boolean }>`
   ${({ $disabled, theme }) =>
     $disabled
       ? css`
-          border: 1px solid ${theme.colors.line3};
-          background-color: ${theme.colors.background2};
-          color: ${theme.colors.grey400};
+          color: ${theme.colors.text6};
         `
       : css`
           color: ${theme.colors.black};
@@ -106,8 +102,15 @@ export const OptionSelectorContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
-
   span {
     width: 10rem;
   }
+`;
+
+export const RadioModalContainer = styled.div`
+  padding: 1.6rem;
+`;
+
+export const RadioItemView = styled.div`
+  padding: 1.3rem 0;
 `;

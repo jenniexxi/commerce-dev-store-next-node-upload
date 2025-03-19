@@ -3,6 +3,7 @@ import { FieldErrors, FieldValues, Path, RegisterOptions, UseFormRegister, UseFo
 import { BtnSize } from '@ui/components/button/Button';
 import CloseButton from '@ui/components/button/CloseButton';
 import * as S from './Input.style';
+import SvgIcon from '@ui/commons/SvgIcon';
 
 type Props<T extends FieldValues> = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'name'> & {
   name: Path<T>;
@@ -46,7 +47,7 @@ const Input = forwardRef(
   ) => {
     const inputProps = useForm && register ? register(name, rules) : { name, value, onChange };
 
-    const errorMessage = useForm ? errors?.[name]?.message?.toString() || '' : error;
+    const errorMessage = useForm ? (errors && errors[name] && errors[name]?.message?.toString()) || '' : error;
     const watchedValue = useForm && watch ? watch(name) : value || '';
     const showResetButton = watchedValue?.toString().length > 0 && !!resetValue;
     return (
@@ -65,18 +66,18 @@ const Input = forwardRef(
             {...props}
           />
           {showResetButton && (
-            <S.Icon>
-              <CloseButton
-                size={26}
-                strokeWidth={1}
-                onClick={resetValue}
+            <S.IconBtn onClick={resetValue}>
+              <SvgIcon
+                path={'/ui/svg/ico_close_circle_gray.svg'}
+                width={24}
+                height={24}
               />
-            </S.Icon>
+            </S.IconBtn>
           )}
           {error && (
-            <S.Icon>
+            <S.IconBtn>
               <></>
-            </S.Icon>
+            </S.IconBtn>
           )}
         </S.InputWrapper>
         {errorMessage !== '' && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}

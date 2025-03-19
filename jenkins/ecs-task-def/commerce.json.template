@@ -1,0 +1,58 @@
+{
+    "family": "rr-commerce-dev-commerce-task-define", /* 태스크 정의의 이름, 버전 관리를 위한 식별자 */
+    "containerDefinitions": [ /* 컨테이너 정의 배열, 하나 이상의 컨테이너 설정 포함 */
+        {
+            "name": "rr-commerce-dev-commerce-cont", /* 컨테이너 이름, 로그 식별 및 서비스 참조용 */
+            "image": "{{AWS_ACCOUNT_ID}}.dkr.ecr.ap-northeast-2.amazonaws.com/rr-commerce-dev-commerce-ecr:{{BUILD_NUMBER}}", /* 컨테이너 이미지 URI, 변수로 계정ID와 빌드번호 사용 */
+            "cpu": 1024, /* 컨테이너에 할당할 CPU 유닛 (1024 = 1 vCPU) */
+            "memory": 2048, /* 컨테이너에 할당할 최대 메모리(MB) */
+            "memoryReservation": 1024, /* 컨테이너에 보장할 최소 메모리(MB) */
+            "portMappings": [ /* 포트 매핑 설정 배열 */
+                {
+                    "name": "commerce-port", /* 포트 매핑 이름, 식별용 */
+                    "containerPort": 3000, /* 컨테이너 내부 포트 */
+                    "hostPort": 3000, /* 호스트 포트 (awsvpc 모드에서는 containerPort와 동일해야 함) */
+                    "protocol": "tcp" /* 프로토콜 유형 (tcp 또는 udp) */
+                }
+            ],
+            "essential": true, /* 필수 컨테이너 여부, true일 경우 이 컨테이너 실패 시 태스크 전체 중지 */
+            "environment": [ /* 환경변수 설정 배열 */
+                {
+                    "name": "NODE_ENV", /* 환경변수 이름 */
+                    "value": "development" /* 환경변수 값 */
+                }
+            ],
+            "environmentFiles": [], /* 환경변수 파일 목록, 사용하지 않음 */
+            "mountPoints": [], /* 볼륨 마운트 지점 목록, 사용하지 않음 */
+            "volumesFrom": [], /* 다른 컨테이너에서 볼륨 공유 설정, 사용하지 않음 */
+            "ulimits": [], /* 리소스 한계 설정, 사용하지 않음 */
+            "logConfiguration": { /* 로깅 설정 */
+                "logDriver": "awslogs", /* AWS CloudWatch Logs 드라이버 사용 */
+                "options": { /* 로그 드라이버 옵션 */
+                    "awslogs-group": "/ecs/rr-commerce-dev-commerce-task-define", /* CloudWatch 로그 그룹 이름 */
+                    "mode": "non-blocking", /* 로그 전송 모드, 비차단 방식으로 성능 향상 */
+                    "awslogs-create-group": "true", /* 로그 그룹이 없을 경우 자동 생성 */
+                    "max-buffer-size": "25m", /* 로그 버퍼 최대 크기 */
+                    "awslogs-region": "ap-northeast-2", /* AWS 리전 */
+                    "awslogs-stream-prefix": "ecs" /* 로그 스트림 접두사 */
+                },
+                "secretOptions": [] /* 비밀값 옵션, 사용하지 않음 */
+            },
+            "systemControls": [] /* Linux 커널 파라미터 설정, 사용하지 않음 */
+        }
+    ],
+    "taskRoleArn": "arn:aws:iam::{{AWS_ACCOUNT_ID}}:role/rr-dev-ecs-task-iam-role", /* 태스크가 AWS 서비스에 접근할 때 사용할 IAM 역할 */
+    "executionRoleArn": "arn:aws:iam::{{AWS_ACCOUNT_ID}}:role/rr-dev-ecs-task-execution-iam-role", /* ECS 에이전트가 이미지 가져오기, 로그 푸시 등에 사용할 IAM 역할 */
+    "networkMode": "awsvpc", /* 네트워크 모드, awsvpc는 각 태스크가 ENI를 갖는 방식 */
+    "volumes": [], /* 볼륨 정의 목록, 사용하지 않음 */
+    "placementConstraints": [], /* 태스크 배치 제약 조건, 사용하지 않음 */
+    "requiresCompatibilities": [
+        "FARGATE" /* 이 태스크 정의가 호환되어야 하는 시작 유형, Fargate는 서버리스 모드 */
+    ],
+    "cpu": "1024", /* 태스크 전체에 할당되는 CPU 유닛 (문자열 형태) */
+    "memory": "2048", /* 태스크 전체에 할당되는 메모리(MB) (문자열 형태) */
+    "runtimePlatform": { /* 런타임 플랫폼 설정 */
+        "cpuArchitecture": "X86_64", /* CPU 아키텍처, x86_64 또는 ARM64 선택 가능 */
+        "operatingSystemFamily": "LINUX" /* OS 계열, LINUX 또는 WINDOWS 선택 가능 */
+    }
+} 

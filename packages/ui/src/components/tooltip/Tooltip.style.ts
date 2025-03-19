@@ -1,38 +1,35 @@
 import styled, { css } from 'styled-components';
 
 export const TipContainer = styled.div`
-  display: flex;
   position: relative;
+  display: flex;
   align-items: center;
 `;
 
 export const TipTrigger = styled.div`
   display: inline-flex;
-  width: 1.6rem;
-  color: #838383;
-  font-weight: 500;
-  font-size: 1.6rem;
   align-items: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #838383;
+  width: 1.6rem;
 `;
 
 export const TipTarget = styled.div`
   display: none;
   position: absolute;
   top: 2.5rem;
-  right: 0;
   left: 0;
-  z-index: 2;
+  right: 0;
   opacity: 0;
+  z-index: 2;
   transition: all 0.3s;
-
   &.show {
     display: block;
     opacity: 1;
   }
-
   &.top {
     top: -4rem;
-
     i {
       transform: rotate(-180deg) translateX(-10px);
       top: auto;
@@ -43,12 +40,12 @@ export const TipTarget = styled.div`
 
 export const TipTargetInner = styled.div`
   position: absolute;
-  width: 28rem;
   padding: 1.6rem;
-  border-radius: 1.2rem;
-  text-align: left;
   background: #fff;
-  box-shadow: 0 0 8px rgb(21 21 21 / 12%);
+  border-radius: 1.2rem;
+  box-shadow: 0px 0px 8px rgba(21, 21, 21, 0.12);
+  text-align: left;
+  width: 28rem;
 `;
 
 export const TipArrow = styled.i<{ $arrowBorderColor?: string; $arrowBackgroundColor?: string }>`
@@ -57,20 +54,20 @@ export const TipArrow = styled.i<{ $arrowBorderColor?: string; $arrowBackgroundC
   left: 50%;
   transform: translateX(-50%);
 
-  &::before,
-  &::after {
-    display: inline-block;
+  &:before,
+  &:after {
+    content: '';
     position: absolute;
     width: 0;
     height: 0;
-    color: transparent;
     font-size: 0;
     line-height: 0;
+    color: transparent;
+    display: inline-block;
     vertical-align: middle;
-    content: '';
   }
 
-  &::before {
+  &:before {
     left: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -79,9 +76,9 @@ export const TipArrow = styled.i<{ $arrowBorderColor?: string; $arrowBackgroundC
     `}
   }
 
-  &::after {
-    top: 1px;
+  &:after {
     left: 1px;
+    top: 1px;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     ${({ $arrowBackgroundColor }) => css`

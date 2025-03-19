@@ -3,7 +3,7 @@ import * as S from './Checkbox.style';
 
 /* value 값이 없을 수 있으니 옵셔널 처리 */
 
-interface CheckboxProps {
+export type CheckboxProps = {
   id: string;
   value?: string;
   name: string;
@@ -12,7 +12,7 @@ interface CheckboxProps {
   disabled?: boolean;
   fontType?: keyof typeof fonts;
   className?: string;
-}
+};
 
 const Checkbox = ({
   id,
