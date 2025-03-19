@@ -1,0 +1,36 @@
+{
+  "extends": "@repo/typescript-config/nextjs.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "apis/*": ["apis/*"],
+      "app/*": ["app/*"],
+      "components/*": ["components/*"],
+      "hooks/*": ["hooks/*"],
+      "providers/*": ["providers/*"],
+      "public/*": ["public/*"],
+      "stores/*": ["stores/*"],
+      "type/*": ["type/*"],
+      "utils/*": ["utils/*"],
+      "assets/*": ["public/assets/*"],
+      "ui/*": ["public/ui/*"],
+      "@ui/*": ["../../packages/ui/src/*"]
+    },
+    "jsx": "preserve"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    ".next/types/**/*.ts",
+    "eslint.config.js",
+    "type/svgr.d.ts"
+  ],
+  "exclude": ["node_modules", ".next", "resourceMapper.ts"]
+}

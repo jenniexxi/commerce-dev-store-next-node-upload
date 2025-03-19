@@ -1,0 +1,27 @@
+{
+  "extends": "@repo/typescript-config/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "baseUrl": "./src",
+    "paths": {
+      "@ui/svg/*": ["assets/svg/*"],
+      "@ui/images/*": ["assets/images/*"],
+      "@ui/apis/*": ["apis/*"],
+      "@ui/commons": ["commons"],
+      "@ui/commons/*": ["commons/*"],
+      "@ui/components": ["components"],
+      "@ui/components/*": ["components/*"],
+      "@ui/hooks/*": ["hooks/*"],
+      "@ui/stores": ["stores"],
+      "@ui/stores/*": ["stores/*"],
+      "@ui/styles/*": ["styles/*"],
+      "@ui/type/*": ["type/*"],
+      "@ui/utils/*": ["utils/*"]
+    }
+  },
+  "include": ["src", "eslint.config.mjs"],
+  "exclude": ["node_modules", "dist", "resourceMapper.ts"]
+}
